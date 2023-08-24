@@ -1,4 +1,5 @@
 #include "monty.h"
+
 car_t car = {NULL, NULL, NULL, 0};
 /**
  * main - Entry point of the Monty interpreter
