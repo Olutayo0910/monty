@@ -1,32 +1,39 @@
 #include "monty.h"
 
 /**
- * f_sub - Subtracts the top element from the second top element of the stack
- * @head: Pointer to the head of the stack
+ * t_swap - Swaps the top two elements of the stack.
+ * @head: Double pointer to the head of the stack
  * @counter: Line number
  *
- * Description: This function subtracts the top element from the second top
- * element of the stack and replaces the second top element with the result.
+ * Description: If the stack contains less than two elements,
+ * it prints an error message and exits with EXIT_FAILURE.
  */
-void f_sub(stack_t **head, unsigned int counter)
+void t_swap(stack_t **head, unsigned int counter)
 {
-	stack_t *temp;
-	int sub, node;
+	stack_t *top1, *top2;
 
-	temp = *head;
-	for (node = 0; temp != NULL; node++)
-		temp = temp->next;
-	if (node < 2)
+	if (*head == NULL || (*head)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n", counter);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", counter);
 		fclose(car.file);
 		free(car.content);
 		free_node(*head);
 		exit(EXIT_FAILURE);
 	}
-	temp = *head;
-	sub = temp->next->n - temp->n;
-	temp->next->n = sub;
-	*head = temp->next;
-	free(temp);
+
+	top1 = *head;
+	top2 = top1->next;
+
+	top1->prev = top2;
+	top1->next = top2->next;
+
+	if (top2->next)
+		top2->next->prev = top1;
+
+	top2->next = top1;
+	top2->prev = NULL;
+
+	*head = top2;
+
+	free(car.content);
 }

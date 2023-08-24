@@ -74,5 +74,7 @@ void t_pstr(stack_t **head, unsigned int counter);
 void t_rotl(stack_t **head, __attribute__((unused)) unsigned int counter);
 void t_sub(stack_t **head, unsigned int counter);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
+void t_rotr(stack_t **head, __attribute__((unused)) unsigned int counter);
+void t_swap(stack_t **head, unsigned int counter);
 
 #endif
