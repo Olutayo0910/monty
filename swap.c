@@ -10,7 +10,7 @@
  */
 void t_swap(stack_t **head, unsigned int counter)
 {
-	stack_t *top1, *top2;
+	stack_t *temp;
 
 	if (*head == NULL || (*head)->next == NULL)
 	{
@@ -21,19 +21,14 @@ void t_swap(stack_t **head, unsigned int counter)
 		exit(EXIT_FAILURE);
 	}
 
-	top1 = *head;
-	top2 = top1->next;
+	temp = (*head)->next;
+	(*head)->prev = temp;
+	(*head)->next = temp->next;
+	temp->prev = NULL;
+	temp->next = *head;
 
-	top1->prev = top2;
-	top1->next = top2->next;
+	if ((*head)->next != NULL)
+		(*head)->next->prev = *head;
 
-	if (top2->next)
-		top2->next->prev = top1;
-
-	top2->next = top1;
-	top2->prev = NULL;
-
-	*head = top2;
-
-	free(car.content);
+	*head = temp;
 }
